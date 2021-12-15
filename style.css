@@ -92,3 +92,23 @@ header{
 .movie:hover .overview {
     transform: translateY(0);
 } 
+#tags {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto
+}
+.tag {
+    color: white;
+    padding:10px 20px;
+    margin:10px;
+    background-color: black;
+    border-radius: 50px;
+    display: inline-block;
+    cursor: pointer;
+}
+.tag__highlight {
+    background-color:red;
+}
