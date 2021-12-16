@@ -14,9 +14,29 @@ body {
 }
 header{
     padding:1rem;
-    display:flex;
-    justify-content: flex-end;
     background-color: var(--secondary-color);
+}
+.header-wrapper {
+    display:flex;
+    justify-content: space-between;
+    max-width: 80%;
+    margin: 0 auto;
+}
+.nav-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0;
+}
+.nav-list__item {
+    padding-right: 3rem;
+}
+.nav-list__item a{
+    color: white;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 .header__search {
     background-color: transparent;
@@ -34,13 +54,19 @@ header{
 .header__search::placeholder {
     color: #7378c5;
 }
-
-.main {
+#main {
+    max-width: 80%;
+    margin: 0 auto;
+}
+.collection__item-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
 }
-.movie {
+.collection__item {
     width: 300px;
     margin: 1rem;
     border-radius: 3px;
@@ -49,33 +75,34 @@ header{
     position: relative;
     overflow: hidden;
 }
-.movie img {
+.collection__item img {
     width: 100%;
 }
-.movie-info {
+.collection__item-info {
     color:#eee;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding:0.5rem 1rem 1rem;
     letter-spacing: 0.5px;
+    min-height: 70px;
 }
-.movie-info h3 {
+.collection__item-info h3 {
     margin: 0;
 }
-.movie-info span {
+.collection__item-info span {
     background-color: var(--primary-color);
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
     font-weight: bold;
 }
-.movie-info span.green{
+.collection__item-info span.green{
     color:lightgreen;
 }
-.movie-info span.orange{
+.collection__item-info span.orange{
     color:orange;
 }
-.movie-info span.red{
+.collection__item-info span.red{
     color:red;
 }
 .overview {
@@ -89,7 +116,7 @@ header{
     transform: translateY(101%);
     transition: transform 0.3s ease-in;
 }
-.movie:hover .overview {
+.collection__item:hover .overview {
     transform: translateY(0);
 } 
 #tags {
@@ -111,4 +138,23 @@ header{
 }
 .tag__highlight {
     background-color:red;
+}
+.collection_genres-wrapper {
+    padding: 15px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.collection__item-genre {
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 50px;
+    margin: 0 5px 5px;
+}
+.collection-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    padding: 100px 0 30px;
 }

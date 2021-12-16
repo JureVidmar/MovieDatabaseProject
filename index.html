@@ -5,15 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
     <title>Movie database</title>
 </head>s
 <body>
-    <header>
-        <form id="headerForm" id="search"placeholder="Search" class="header__search-from">
-            <input type="text" id="searchHeader" placeholder="Search" class="header__search">
-        </form>
+    <header id="header">
+        <div class="header-wrapper">
+            <nav class="nav-wrapper">
+                <ul class="nav-list">
+                    <li class="nav-list__item"><a href="index.html">Movies</a></li>
+                    <li class="nav-list__item"><a href="index.html">TV series</a></li>
+                    <li class="nav-list__item"><a href="index.html">Watched</a></li>
+                </ul>
+            </nav>
+            <form id="headerForm" id="search"placeholder="Search" class="header__search-from" style="display: none!important;">
+                <input type="text" id="searchHeader" placeholder="Search" class="header__search">
+            </form>
+        </div>
     </header>
-    <div id="tags">
+    <div id="tags" style="display: none!important;">
         <div class="tag">Action</div>
         <div class="tag">Adventure</div>
         <div class="tag">Comedy</div>
@@ -22,79 +40,82 @@
         <div class="tag">Horror</div>
     </div>
     <main id="main" class="main">
-        <div class="movie">
-            <img src="images/unspash-building.jpg" alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                <h3>Overview</h3>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="images/unspash-building.jpg" alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="images/unspash-building.jpg" alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="images/unspash-building.jpg" alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="images/unspash-building.jpg" alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="images/unspash-building.jpg" alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="images/unspash-building.jpg" alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </div>
-        </div>
+        <div class="collection-title">Most Popular Movies</div>
+        <div id="movieWrapper" class="movie-wrapper collection-wrapper"></div>
+        <div class="collection-title">Most Popular Series</div>
+        <div id="seriesWrapper" class="series-wrapper collection-wrapper"></div>
+        <div class="collection-title">Favourites</div>
+        <div id="favouritesWrapper" class="favourites-wrapper collection-wrapper"></div>
     </main>
-    
+
     <script src="script.js"></script>
+    <script src="script-series.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        /* Initialize Slick slider for popular movies */
+        setTimeout(() => {
+            $('.collection-wrapper').slick({
+                dots: false,
+                arows: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 7,
+                slidesToScroll: 7,
+                responsive: [
+                {
+                    breakpoint: 3000,
+                    settings: {
+                    slidesToShow: 6,
+                    slidesToScroll: 6,
+                    infinite: true,
+                    dots: false,
+                    arows: true,
+                    }
+                },
+                {
+                    breakpoint: 2325,
+                    settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 5,
+                    infinite: true,
+                    dots: false,
+                    arows: true,
+                    }
+                },
+                {
+                    breakpoint: 1992,
+                    settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4
+                    }
+                },
+                {
+                    breakpoint: 1660,
+                    settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 1328,
+                    settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 950,
+                    settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                    }
+                }
+                ]
+            }
+            )}, 
+            200);
+        
+    </script>
+
 </body>
 </html>

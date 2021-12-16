@@ -4,7 +4,7 @@ const API_KEY = 'api_key=dab2c8f66df561816f3de5a1bdb51d3a';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const searchURL_Movie = BASE_URL + '/search/movie?'+API_KEY;
+const searchURL = BASE_URL + '/search/movie?'+API_KEY;
 
 
 const genres = [
@@ -165,7 +165,7 @@ function showMovies(data) {
                         var gen_name;
                         gen_name = genre.name
                         t.textContent = gen_name
-                        t.classList.add('collection__item-genre')
+                        t.classList.add('movie__genre')
                         document.getElementById(movieID).append(t); 
                     }
                 })
@@ -173,17 +173,17 @@ function showMovies(data) {
         }
 
 
-        movieEl.classList.add('collection__item');
+        movieEl.classList.add('movie');
         movieEl.innerHTML = `
         <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580"}" alt="${title}">
-        <div class="collection__item-info">
+        <div class="movie-info">
             <h3>${title}</h3>
             <span class="${getColor(vote_average)}">${vote_average}</span>
         </div>
         <div class="overview">
             <h3>Overview</h3>
             ${overview}
-            <div class="collection_genres-wrapper" id="movie${i}"></div>
+            <div class="movie_genres-wrapper" id="movie${i}"></div>
         </div>
         
         `
@@ -210,6 +210,6 @@ form.addEventListener('submit', (e) => {
     const searchTerm = search.value;
 
     if (searchTerm) {
-        getMoviesPopular(searchURL_Movie+'&query='+ searchTerm)
+        getMoviesPopular(searchURL+'&query='+ searchTerm)
     }
 })
