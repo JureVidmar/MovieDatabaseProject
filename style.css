@@ -158,3 +158,26 @@ header{
     color: white;
     padding: 100px 0 30px;
 }
+.add-fav {
+    padding-right: 15px;
+}
+.add-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.add-icon .add-tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+  
+.add-icon:hover .add-tooltip {
+    visibility: visible;
+}
