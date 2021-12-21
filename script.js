@@ -166,8 +166,10 @@ function highlightSelection() {
         })
     }
 }
-getMoviesPopular(API_URL);
 
+setTimeout(() => {
+    getMoviesPopular(API_URL);
+}, 200);
 function getMoviesPopular(url) {
     fetch(url).then(res => res.json()).then(data => {
         console.log(data.results)
@@ -212,13 +214,14 @@ function showMovies(data) {
 
         for (let i = 0; i < wishArr.length; i++) {
             if (wishArr[i] == id) {
-                console.log('test',i)
+                movieAdded = true
             }
         }
 
         movieEl.classList.add('collection__item');
         movieEl.dataset.id = id;
         movieEl.dataset.movie = 'movie'+i
+        movieEl.dataset.type = 'movie'
         movieEl.innerHTML = `
         <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580"}" alt="${title}">
         <div class="collection__item-info" data-type="movie" data-id="${id}">
@@ -251,7 +254,6 @@ function getColor(vote) {
         return 'red'
     }
 }
-
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -292,6 +294,97 @@ function addToFavWish() {
 
 }
 addToFavWish()
-}, 200)
+}, 600)
+
+
+// dab2c8f66df561816f3de5a1bdb51d3a
+// spiderman id: 634649
+// hawkeye id: 88329
+
+
+function getDetails(url) {
+    fetch(url).then(res => res.json()).then(data => {
+        console.log(data)
+        showDetails(data);
+    })
+}
+function showDetails(data) {
+    var popupMain = document.getElementById('popupDetails')
+    popupMain.innerHTML = ''
+
+    const {genres , id, original_language, original_name, title, release_date, first_air_date ,poster_path, overview, vote_average, number_of_episodes,number_of_seasons} = data
+    var popupEl = document.createElement('div')
+
+    popupEl.classList.add('popup__details-wrapper')
+    
+        let newArr= []
+        let arrOut;
+        genres.forEach(genre => {
+            newArr.push('<span>'+genre.name+'</span>')
+            
+        })
+        /* arrOut = JSON.stringify(newArr) */
+        arrOut = newArr.join('\n')
+    
+
+    popupEl.innerHTML = `
+    <div class="popup__banner">
+        <div class="popup__close">x</div>
+        <div class="popup__banner-wrapper">
+            <div class="popup__banner-img-wrapper">
+                <img class="popup__banner-img" src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580"}">
+            </div>
+            <div class="popup__banner-details">
+                <div class="popup__banner-title"><h1>${title? title: original_name}</h1></div>
+                <div class="popup__info popup__banner-release">Release date: ${release_date? release_date: first_air_date}</div>
+                ${number_of_episodes? '<div class="popup__info popup__banner-episodes">Episodes: '+number_of_episodes+'</div>': ''}
+                ${number_of_seasons? '<div class="popup__info popup__banner-episodes">Seasons: '+number_of_seasons+'</div>': ''}
+                <div class="popup__info popup__banner-rating">Rating: ${vote_average}</div>
+                <div class="popup__info popup__banner-genres">${arrOut}</div>
+            </div>
+        </div>
+        <div class="popup__overview"><p>${overview}</p></div>
+        <div class="popup__actors-wrapper" id="showActorsBtn"></div>
+    </div>
+    `
+    popupMain.appendChild(popupEl)
+
+}
+
+
+function getActor(url) {
+    fetch(url).then(res => res.json()).then(data => {
+        console.log(data)
+        showActors(data)
+    })
+}
+function showActors(data) {
+    
+}
+setTimeout(() => {
+    $(document).ready(function(){
+        $('.collection__item').click(function() {
+            var itemId = $(this).attr('data-id')
+            var itemType = $(this).attr('data-type')
+            var getDetails_URL = getDetails_URL = 'https://api.themoviedb.org/3/'+itemType+'/'+itemId+'?api_key=dab2c8f66df561816f3de5a1bdb51d3a&language=en-US'
+            console.log(getDetails_URL)
+
+            var getActors_URL = 'https://api.themoviedb.org/3/'+itemType+'/'+itemId+'/credits?api_key=dab2c8f66df561816f3de5a1bdb51d3a&language=en-US'
+            
+            getActor(getActors_URL)
+            getDetails(getDetails_URL)
+            $('.body__overlay').slideDown();
+            $('.popup__details').slideDown();
+        })
+        $('.body__overlay').click(function(){
+            $(this).slideUp()
+            $('.popup__details').slideUp()
+        })
+        $('.popup__close').click(function(){
+            $('.body__overlay').slideUp()
+            $('.popup__details').slideUp()
+        })
+    })
+}, 350);
 
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+    <title>Movie database</title>
+</head>
+<body>
+    <header id="header">
+        <div class="header-wrapper">
+            <nav class="nav-wrapper">
+                <ul class="nav-list">
+                    <li class="nav-list__item"><a href="/index.html">Home</a></li>
+                    <li class="nav-list__item"><a href="/movies/index.html">Movies</a></li>
+                    <li class="nav-list__item"><a href="/tv/index.html">TV series</a></li>
+                    <li class="nav-list__item"><a href="/favourite/index.html">Watchlist</a></li>
+                </ul>
+            </nav>
+            <form id="headerForm" id="search"placeholder="Search" class="header__search-from">
+                <input type="text" id="searchHeader" placeholder="Search" class="header__search">
+            </form>
+        </div>
+    </header>
+    <div id="tags" style="display: none!important;">
+        <div class="tag">Action</div>
+        <div class="tag">Adventure</div>
+        <div class="tag">Comedy</div>
+        <div class="tag">Drama</div>
+        <div class="tag">Romance</div>
+        <div class="tag">Horror</div>
+    </div>
+    <main id="main" class="main">
+        <div class="collection-title">Most Popular Series</div>
+        <div id="seriesWrapper" class="series-wrapper collection-wrapper"></div>
+    </main>
+
+    <script src="/script.js"></script>
+    <script src="/script-series.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+</body>
+</html>

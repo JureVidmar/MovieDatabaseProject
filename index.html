@@ -21,9 +21,10 @@
         <div class="header-wrapper">
             <nav class="nav-wrapper">
                 <ul class="nav-list">
-                    <li class="nav-list__item"><a href="index.html">Movies</a></li>
-                    <li class="nav-list__item"><a href="index.html">TV series</a></li>
-                    <li class="nav-list__item"><a href="index.html">Watched</a></li>
+                    <li class="nav-list__item"><a href="index.html">Home</a></li>
+                    <li class="nav-list__item"><a href="movies/index.html">Movies</a></li>
+                    <li class="nav-list__item"><a href="tv/index.html">TV series</a></li>
+                    <li class="nav-list__item"><a href="favourite/index.html">Watchlist</a></li>
                 </ul>
             </nav>
             <form id="headerForm" id="search"placeholder="Search" class="header__search-from" style="display: none!important;">
@@ -40,14 +41,34 @@
         <div class="tag">Horror</div>
     </div>
     <main id="main" class="main">
-        <div class="collection-title">Most Popular Movies</div>
+        <h3 class="collection-title">Most Popular Movies</h3>
         <div id="movieWrapper" class="movie-wrapper collection-wrapper"></div>
-        <div class="collection-title">Most Popular Series</div>
+        <h3 class="collection-title">Most Popular Series</h3>
         <div id="seriesWrapper" class="series-wrapper collection-wrapper"></div>
-        <div class="collection-title">Favourites</div>
-        <div id="favouritesWrapper" class="favourites-wrapper collection-wrapper"></div>
+        <!-- <div class="collection-title">Favourites</div>
+        <div id="favouritesWrapper" class="favourites-wrapper collection-wrapper"></div> -->
     </main>
+    <div class="body__overlay" id="overlay"></div>
+    <div class="popup__details" id="popupDetails">
+        <div class="popup__banner">
+            <div class="popup__close">x</div>
+            <div class="popup__banner-wrapper">
+                <div class="popup__banner-img-wrapper">
+                    <img class="popup__banner-img" src="">
+                </div>
+                <div class="popup__banner-details">
+                    <div class="popup__banner-title"><h1></h1></div>
+                    <div class="popup__banner-release"></div>
+                    <div class="popup__banner-rating"></div>
+                    <div class="popup__banner-genres"></div>
+                </div>
+            </div>
+            <div class="popup__overview"><p></p></div>
+            <div class="popup__actors-wrapper">
+            </div>
+        </div>
 
+    </div>
     <script src="script.js"></script>
     <script src="script-series.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -113,7 +134,7 @@
                 ]
             }
             )}, 
-            200);
+            300);
         
     </script>
 

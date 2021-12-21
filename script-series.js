@@ -48,6 +48,7 @@ function showSeries(data) {
         seriesEl.classList.add('collection__item');
         seriesEl.dataset.id = id;
         seriesEl.dataset.series = 'series'+i
+        seriesEl.dataset.type = 'tv'
         seriesEl.innerHTML = `
         <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580"}" alt="${name}">
         <div class="collection__item-info" data-type="series" data-id="${id}">
