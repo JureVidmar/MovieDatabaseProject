@@ -311,8 +311,8 @@ function getDetails(url) {
 function showDetails(data) {
     var popupMain = document.getElementById('popupDetails')
     popupMain.innerHTML = ''
-
-    const {genres , id, original_language, original_name, title, release_date, first_air_date ,poster_path, overview, vote_average, number_of_episodes,number_of_seasons} = data
+    
+    const {genres , id, original_language, budget, original_name, title, release_date, first_air_date ,poster_path, overview, vote_average, number_of_episodes,number_of_seasons} = data
     var popupEl = document.createElement('div')
 
     popupEl.classList.add('popup__details-wrapper')
@@ -329,8 +329,8 @@ function showDetails(data) {
 
     popupEl.innerHTML = `
     <div class="popup__banner">
-        <div class="popup__close">x</div>
-        <div class="popup__banner-wrapper">
+        <div class="popup__banner-wrapper" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://image.tmdb.org/t/p/original${poster_path});
+        ">
             <div class="popup__banner-img-wrapper">
                 <img class="popup__banner-img" src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580"}">
             </div>
@@ -344,7 +344,9 @@ function showDetails(data) {
             </div>
         </div>
         <div class="popup__overview"><p>${overview}</p></div>
-        <div class="popup__actors-wrapper" id="showActorsBtn"></div>
+        <div class="popup__bottom">
+        <div class="popup__actors-wrapper" id="actorsWrapper"></div>
+        </div>
     </div>
     `
     popupMain.appendChild(popupEl)
@@ -359,7 +361,22 @@ function getActor(url) {
     })
 }
 function showActors(data) {
-    
+    var actorsWrapper = document.getElementById('actorsWrapper')
+    actorsWrapper.innerHTML = ''
+    data.cast.forEach(actor => {
+        const {id, name, character, profile_path} = actor
+        var actorsEl = document.createElement('div')
+        actorsEl.classList.add('popup__actor')
+        actorsEl.setAttribute('data-actor-id', id)
+
+        actorsEl.innerHTML = `
+        <div class="popup__actor-img">
+            <img src="${profile_path? IMG_URL+profile_path: "http://via.placeholder.com/1080x1580"}">
+        </div>
+        <div class="popup__actor-name"><span class="actor-name">${name}</span><span class="character-name">${character}</span></div>
+        `
+        actorsWrapper.appendChild(actorsEl)
+    })
 }
 setTimeout(() => {
     $(document).ready(function(){
@@ -371,19 +388,31 @@ setTimeout(() => {
 
             var getActors_URL = 'https://api.themoviedb.org/3/'+itemType+'/'+itemId+'/credits?api_key=dab2c8f66df561816f3de5a1bdb51d3a&language=en-US'
             
-            getActor(getActors_URL)
             getDetails(getDetails_URL)
+            getActor(getActors_URL)
             $('.body__overlay').slideDown();
             $('.popup__details').slideDown();
+            $('.popup__close').slideDown();
+            $('.body__overlay').click(function(){
+                $(this).slideUp()
+                $('.popup__details').slideUp()
+                $('.popup__close').slideUp();
+            })
+            $('.popup__close').click(function(){
+                $('.body__overlay').slideUp()
+                $('.popup__details').slideUp()
+                $(this).slideUp()
+            })
+
+            setTimeout(() => {
+                var popupDistance = jQuery('.popup__details-wrapper').offset().left +20
+                console.log(popupDistance)
+                $('.popup__close').css('top','220px' )
+                $('.popup__close').css('right',popupDistance )
+            }, 200);
+
         })
-        $('.body__overlay').click(function(){
-            $(this).slideUp()
-            $('.popup__details').slideUp()
-        })
-        $('.popup__close').click(function(){
-            $('.body__overlay').slideUp()
-            $('.popup__details').slideUp()
-        })
+
     })
 }, 350);
 
